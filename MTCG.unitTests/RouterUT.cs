@@ -1,5 +1,6 @@
 ﻿//using System.Collections.Generic;
 using MTCG.Routing;
+using MTCG.Models;
 using Xunit;
 
 //number of tests: 9

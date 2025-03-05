@@ -2,7 +2,7 @@
 using System.Net.Sockets;
 using System.Text;
 using MTCG.Routing;
-using HttpRequest = MTCG.Routing.HttpRequest;
+using HttpRequest = MTCG.Models.HttpRequest;
 
 namespace MTCG.Server
 {
@@ -40,6 +40,7 @@ namespace MTCG.Server
         // u gotta implement the different responses
         // connect with database & whatnot 
         // also where do i put game logic etc lol find that out 
+        //login logic also somewhere ? idk man
         private static async Task HandleClientAsync(TcpClient client)
         {
             try

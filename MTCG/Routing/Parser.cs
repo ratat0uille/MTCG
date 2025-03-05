@@ -1,17 +1,8 @@
-﻿
+﻿using MTCG.Models;
 using System.Text;
 
 namespace MTCG.Routing
 {
-    public class HttpRequest
-    {
-        public string Method { get; set; }
-        public string Path { get; set; }
-        public string Version { get; set; }
-        public Dictionary<string, string> Headers { get; set; } = new();
-        public string Body { get; set; }
-        public Dictionary<string, string> QueryParams { get; set; } = new(); 
-    }
 
     public class Parser
     {
