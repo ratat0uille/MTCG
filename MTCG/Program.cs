@@ -1,10 +1,11 @@
-﻿namespace MTCG
+﻿
+namespace MTCG
 {
-    internal class Program
+    public class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            await Server.Server.StartAsync();
         }
     }
 }

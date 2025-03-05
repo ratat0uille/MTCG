@@ -1,10 +1,6 @@
 ﻿using System.Net;
 using System.Net.Sockets;
-using System.Threading;
 using System.Text;
-using System.Collections.Generic;
-using System.IO;
-using System;
 using MTCG.Routing;
 using HttpRequest = MTCG.Routing.HttpRequest;
 
@@ -12,6 +8,8 @@ namespace MTCG.Server
 {
     internal class Server
     {
+        private static readonly Router _router = new Router(); 
+
         /*----------------------------------START-ASYNC-------------------------------------*/
         public static async Task StartAsync()
         {
@@ -45,18 +43,27 @@ namespace MTCG.Server
             {
                 using (client)
                 using (NetworkStream stream = client.GetStream())
+                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
                 using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8) { AutoFlush = true })
-                { 
-                    HttpRequest request = await Parser.ParseAsync(stream);
-                }
+                {
 
+                    HttpRequest request = await Parser.ParseAsync(stream);
+
+                    string responseBody = _router.Route(request);
+
+                    string httpResponse = $"HTTP/1.1 200 OK\r\n" +
+                                          $"Content-Length: {responseBody.Length}\r\n" +
+                                          $"Content-Type: text/plain\r\n" +
+                                          $"\r\n" +
+                                          $"{responseBody}";
+
+                    await writer.WriteAsync(httpResponse);
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Client error: {ex.Message}");
-
             }
         }
     }
 }
-
