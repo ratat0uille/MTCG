@@ -37,13 +37,16 @@ namespace MTCG.Server
         }
 
         /*--------------------------------HANDLE-CLIENT-ASYNC---------------------------------------*/
+        // u gotta implement the different responses
+        // connect with database & whatnot 
+        // also where do i put game logic etc lol find that out 
         private static async Task HandleClientAsync(TcpClient client)
         {
             try
             {
                 using (client)
                 using (NetworkStream stream = client.GetStream())
-                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8)) //why do i never use this
                 using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8) { AutoFlush = true })
                 {
 
